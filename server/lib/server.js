@@ -17,15 +17,34 @@ var con = mysql.createConnection({
 
 con.connect(function(err) {
   if (err) throw err
-  con.query("CREATE DATABASE IF NOT EXISTS footballers", function (err, result) {
+  con.query("CREATE DATABASE IF NOT EXISTS CSV_DB", function (err, result) {
     if (err) throw err
-    sqldumpImporter ()
+    //sqldumpExecsql()
+    sqldumpImporter()
   })
 })
 
 const server = http.createServer(app)
 
-function sqldumpImporter () {
+function sqldumpExecsql() {
+  var execsql = require('execsql'),
+      dbConfig = {
+          host: config.db.host,
+          user: config.db.user,
+          password: config.db.password
+      },
+      sql = 'use footballers;',
+      sqlFile = __dirname + '/api/sqldumps/footballers2655c10.sql';
+  execsql.config(dbConfig)
+      .exec(sql)
+      .execFile(sqlFile, function(err, results){
+          console.log(results)
+          syncSequelize()
+      }).end()
+}
+
+
+function sqldumpImporter() {
   importer.config({
     'host': config.db.host,
     'user': config.db.user,
