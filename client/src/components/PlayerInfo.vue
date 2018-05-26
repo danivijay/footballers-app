@@ -8,6 +8,7 @@
           </v-card-title>
           <v-data-table
             :items="footballerInfo"
+            hide-actions
           >
             <template slot="items" slot-scope="props">
               <td class="text-xs-right">{{ props.item.key }}</td>
@@ -35,17 +36,13 @@ export default {
     return axios.get(url)
     .then((response) => {
       let res = response.data.footballers[0]
-      console.log(res)
       for (let i in res) {
-        console.log(i, res[i])
         let item = {
           key: i,
           value: res[i]
         }
         this.footballerInfo.push(item)
       }
-      //this.footballerInfo = response.data.footballers[0]
-      console.log(this.footballerInfo)
     })
     .catch(function (error) {
       throw error

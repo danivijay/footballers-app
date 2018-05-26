@@ -9,7 +9,8 @@
             <div>{{ footballer.Nationality }}</div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat dark @click.prevent="loadFootballer(footballer.Name)">More</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn flat dark class="light-blue darken-1" @click.prevent="loadFootballer(footballer.Name)">More</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -28,9 +29,7 @@ export default {
   data () {
     return {
       footballers: [],
-      currentPage: 0,
-      footballerPopup: false,
-      footballerInfo: {}
+      currentPage: 0
     }
   },
   methods: {
