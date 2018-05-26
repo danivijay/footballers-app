@@ -9,7 +9,7 @@
             <div>{{ footballer.Nationality }}</div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat dark>More</v-btn>
+            <v-btn flat dark @click.prevent="loadFootballer(footballer.Name)">More</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -28,16 +28,21 @@ export default {
   data () {
     return {
       footballers: [],
-      currentPage: 0
+      currentPage: 0,
+      footballerPopup: false,
+      footballerInfo: {}
     }
   },
   methods: {
     loadMore () {
-      this.$store.dispatch('fetchFootballers', this.currentPage)
+      this.$store.dispatch('fetchAllFootballers', this.currentPage)
         .then (() => {
           this.footballers = this.$store.getters.getFootballers
           this.currentPage++
         })
+    },
+    loadFootballer (name) {
+      this.$router.push(`/${name}`)
     }
   },
   mounted () {

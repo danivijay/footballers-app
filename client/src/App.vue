@@ -2,7 +2,7 @@
   <v-app>
     <v-toolbar
     >
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+      <router-link to="/" tag="v-toolbar-title" style="cursor: pointer;">{{ title }}</router-link>
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-content>

@@ -15,7 +15,7 @@ export default new Vuex.Store({
     initFootballers (state) {
       state.footballers = []
     },
-    fetchFootballers (state, payload) {
+    fetchAllFootballers (state, payload) {
       if (payload != '') {
         for (let newfootballer of payload) {
           let newvalue = 1
@@ -33,16 +33,16 @@ export default new Vuex.Store({
     initFootballers ({commit}) {
       commit('initFootballers')
     },
-    fetchFootballers ({commit, getters}, payload) {
+    fetchAllFootballers ({commit, getters}, payload) {
       let page = parseInt(payload) * 12
       const url = `http://localhost:3000/footballers/${page}`
       return axios.get(url)
       .then((response) => {
-          commit('fetchFootballers', response.data.footballers)
-        })
-        .catch(function (error) {
-          throw error
-        })
+        commit('fetchAllFootballers', response.data.footballers)
+      })
+      .catch(function (error) {
+        throw error
+      })
     }
   },
   getters: {
